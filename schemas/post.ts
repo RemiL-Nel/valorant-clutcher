@@ -50,15 +50,6 @@ export default defineType({
       title: "Seconds Until Pause",
       type: "number",
     }),
-    defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "videoTitle",
-        maxLength: 96,
-      },
-    }),
 
     defineField({
       name: "publishedAt",

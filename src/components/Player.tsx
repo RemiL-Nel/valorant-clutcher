@@ -3,11 +3,12 @@ import ReactPlayer from "react-player";
 
 type Props = {
   post: any;
-  handleTimer: any;
+  stopTimer: any;
+  playTimer: any;
   confirm: any;
 };
 
-export default function Player({ post, handleTimer, confirm }: Props) {
+export default function Player({ post, stopTimer, playTimer, confirm }: Props) {
   const [played, setPlayed] = useState(0);
 
   return (
@@ -25,7 +26,7 @@ export default function Player({ post, handleTimer, confirm }: Props) {
           }}
           onPause={() => {
             if (!confirm && played > 1) {
-              handleTimer();
+              playTimer();
             }
           }}
           playIcon={

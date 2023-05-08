@@ -32,6 +32,10 @@ export default function Home({ posts, postCount }: Props) {
     const index = posts.indexOf(currentClip);
 
     setCurrentClip(posts[index + 1], setIsCorrect(0), setConfirm(false)), 3000;
+    resetTimer();
+  };
+  const resetTimer = () => {
+    setTime(100);
   };
 
   useEffect(() => {
@@ -52,19 +56,18 @@ export default function Home({ posts, postCount }: Props) {
 
     setSelected(null);
   };
-  const handleTimer = () => {
-    if (!timer && time === 100) {
-      timer = setInterval(() => {
+  let timerInterval: any;
+  const playTimer = () => {
+    if (time === 100) {
+      timerInterval = setInterval(() => {
         setTime(time--);
       }, 1000);
     }
-    if (confirm) {
-      clearInterval(timer);
-    }
-    if (time <= 0) {
-      handleAnswer();
-      clearInterval(timer);
-    }
+  };
+
+  const stopTimer = () => {
+    clearInterval(timerInterval);
+    setTime(100);
   };
 
   for (let i = 0; i < postCount; i++) {
@@ -89,7 +92,8 @@ export default function Home({ posts, postCount }: Props) {
         <Player
           post={currentClip}
           confirm={confirm}
-          handleTimer={handleTimer}
+          stopTimer={stopTimer}
+          playTimer={playTimer}
         />
         <span>Score: {score}/10</span>
       </section>

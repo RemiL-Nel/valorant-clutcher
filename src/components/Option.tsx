@@ -24,10 +24,16 @@ export default function Option({
   //     setGoodAnswer(false);
   //   }
   // }, [isCorrect]);
-
+  const handleSelect = () => {
+    if (confirm) {
+      setSelected(null);
+    } else {
+      setSelected(option);
+    }
+  };
   return (
     <li
-      onClick={() => setSelected(option)}
+      onClick={() => handleSelect()}
       className={`${
         selected == option ? `bg-[#efd807] text-black` : `bg-transparent`
       } ${confirm && option == answer && `border-green-500 text-green-500`} ${
